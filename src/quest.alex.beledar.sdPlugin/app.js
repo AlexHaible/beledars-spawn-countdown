@@ -104,7 +104,10 @@ function handleCountdown(closestTime) {
         if (timeDiff <= 0) {
             // Countdown is finished
             clearInterval(updateInterval);
-            $SD.setTitle(context, "Event Started");
+            $SD.setTitle(context, "Event\nStarted");
+            sleep(10000).then(() => { // Wait 10 seconds before restarting
+                updateCountdown(); // Restart countdown
+            });
             return;
         }
 
