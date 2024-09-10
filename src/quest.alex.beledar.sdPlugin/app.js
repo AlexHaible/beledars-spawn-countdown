@@ -106,6 +106,7 @@ function handleCountdown(closestTime) {
             clearInterval(updateInterval);
             $SD.setTitle(context, "Event\nStarted");
             sleep(10000).then(() => { // Wait 10 seconds before restarting
+                updateInterval = setInterval(updateCountdown, 60 * 1000); // Update every minute
                 updateCountdown(); // Restart countdown
             });
             return;
