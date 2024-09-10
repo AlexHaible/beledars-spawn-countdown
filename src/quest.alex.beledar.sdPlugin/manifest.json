@@ -1,0 +1,44 @@
+{
+	"SDKVersion": 2,
+	"Author": "Sauravisus",
+	"CodePath": "app.html",
+	"Description": "Countdown Timer for Beledar's Spawn",
+	"Name": "Beledar's Spawn Timer",
+	"Icon": "actions/template/assets/action",
+	"URL": "https://www.elgato.com/en/gaming/stream-deck",
+	"Version": "1.0.0",
+	"Software": {
+		"MinimumVersion": "5.0"
+	},
+	"OS": [
+		{
+			"Platform": "mac",
+			"MinimumVersion": "10.11"
+		},
+		{
+			"Platform": "windows",
+			"MinimumVersion": "10"
+		}
+	],
+	"Category": "Beledar's Spawn Timer",
+	"CategoryIcon": "actions/template/assets/btn_system_duration",
+	"Actions": [
+		{
+			"Icon": "actions/template/assets/btn_system_duration",
+			"Name": "Countdown Timer",
+			"Controllers": ["Keypad"],
+			"States": [
+				{
+					"Image": "actions/template/assets/button_bg",
+					"Font": "Arial",
+					"FontSize": "18",
+					"TextAlign": "center",
+					"TitleAlignment": "middle"
+				}
+			],
+			"Tooltip": "This will inform you when the next spawn of Beledar's Spawn is.",
+			"UUID": "quest.alex.beledar.timer",
+			"PropertyInspectorPath": "actions/template/property-inspector/inspector.html"
+		}
+	]
+}
