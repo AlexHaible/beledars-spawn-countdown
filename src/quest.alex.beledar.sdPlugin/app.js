@@ -131,3 +131,7 @@ function handleCountdown(closestTime) {
         updateInterval = setInterval(updateCountdown, 1000); // Update every second
     }
 }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
