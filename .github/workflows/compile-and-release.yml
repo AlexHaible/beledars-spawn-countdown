@@ -1,3 +1,5 @@
+name: Compile And Release
+
 on:
   push:
     tags:
