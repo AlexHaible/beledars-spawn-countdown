@@ -4,7 +4,7 @@
 	"CodePath": "app.html",
 	"Description": "Countdown Timer for Beledar's Spawn",
 	"Name": "Beledar's Spawn Timer",
-	"Icon": "actions/template/assets/action",
+	"Icon": "actions/template/assets/button_bg",
 	"URL": "https://www.elgato.com/en/gaming/stream-deck",
 	"Version": "1.0.2",
 	"Software": {
