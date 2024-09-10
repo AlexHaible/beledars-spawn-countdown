@@ -17,7 +17,6 @@ jobs:
           output-directory: "/release" # Where you want the .streamDeckPlugin
       # Create an artifact to download it
       - name: Upload .streamDeckPlugin artifact
-        uses: actions/upload-artifact@v4
+        uses: softprops/action-gh-release@v2
         with:
-          name: quest.alex.beledar.streamDeckPlugin
-          path: ./release/
+          files: ./release/quest.alex.beledar.streamDeckPlugin
