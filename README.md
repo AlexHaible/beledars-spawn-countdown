@@ -1,73 +1,18 @@
+# Beledar's Spawn Countdown Timer
 
-# Stream Deck Plugin Template
+This is a simple countdown timer for the spawn of the Beledar's Spawn rare mob in the Hallowfall zone of World of Warcraft: The War Within.
 
-The `Stream Deck Plugin Template` is a template to let you get started quickly when writing a JavaScript plugin for [Stream Deck](https://docs.elgato.com/sdk/). `Stream Deck Plugin Template` requires Stream Deck 6.0 or later.
+## Usage
 
-## Description
+Simply add the action to your Stream Deck like you would any other action. It'll show the time remaining until the next spawn of Beledar's Spawn.
+When the timer reaches 0, the action will show "Event Started" instead of the time remaining. After 10 seconds, it will revert back to showing the time remaining.
 
-`Stream Deck Plugin Template` is a complete plugin that shows you how to
+## Configuration
 
-- load and save settings using Stream Deck's persistent store
-- setup and communicate with the Property Inspector
-- pass messages directly from Property Inspector to the plugin (and vice versa)
-- localize your Property Inspector's UI to another language
+Select the action in the Stream Deck software and select which region you're in. The timer will automatically adjust to the correct spawn time based on the region you select.
+Currently only EU and NA are supported. If no region is selected, it will default to EU.
 
-## Features
+## Installation
 
-- code written in Javascript
-- cross-platform (macOS, Windows)
-- localization support
-- styled [Property Inspector](https://developer.elgato.com/documentation/stream-deck/sdk/property-inspector/) included
-- Property Inspector contains all required boilerplate code to let you instantly work on your plugin's code.
-
-## Quick Start Guide
-
-A short guide to help you get started quickly.
-
-### Clone the repo
-
-```git clone https://github.com/elgatosf/streamdeck-plugin-template```
-
-### Replace Name
-
-Rename the folder as well as any references.
-
-`quest.alex.beledar.sdPlugin` with `my.domain.plugin-name.sdPlugin`
-
-> [!IMPORTANT]  
-> When sym-linking the plugin, the folder name must end with `.sdPlugin`.
-
-### Get the latest library
-
-You can either clone the javascript library or add it as a submodule to your repository.
-
-#### Clone
-
-```git clone https://github.com/elgatosf/streamdeck-javascript-sdk src/my.domain.plugin-name/libs```
-
-#### Add Submodule
-
-```git submodule add https://github.com/elgatosf/streamdeck-javascript-sdk src/my.domain.plugin-name/libs```
-
-### Start Coding
-
-You can get started in app.js!
-
-```javascript
-const myAction = new Action('quest.alex.beledar.action');
-
-/**
- * The first event fired when Stream Deck starts
- */
-$SD.onConnected(({ actionInfo, appInfo, connection, messageType, port, uuid }) => {
-  console.log('Stream Deck connected!');
-});
-
-myAction.onKeyUp(({ action, context, device, event, payload }) => {
-  console.log('Your key code goes here!');
-});
-
-myAction.onDialRotate(({ action, context, device, event, payload }) => {
-  console.log('Your dial code goes here!');
-});
-```
+1. Download the latest release from the [Releases](https://github.com/AlexHaible/beledars-spawn-countdown/releases) page.
+2. Install the plugin by double-clicking the downloaded file.
