@@ -10,6 +10,8 @@ jobs:
     runs-on: [macos-latest] # 👀 This action only works on macOS
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
       # Do you stuff to build the project
       - uses: AlexHaible/streamdeck-action@0.0.3
         with:
