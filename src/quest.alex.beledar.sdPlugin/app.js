@@ -14,7 +14,6 @@ const times = {
  * When the action appears, request the settings and start countdown.
  */
 timerAction.onWillAppear(({ context }) => {
-    //console.log("Context", context);
     timerActionContext = context;
     $SD.getSettings(context);
 });
@@ -23,7 +22,6 @@ timerAction.onWillAppear(({ context }) => {
  * Handle settings and start the countdown based on the region.
  */
 timerAction.onDidReceiveSettings(({ payload }) => {
-    //console.log("Payload", payload);
     const region = (payload.settings && payload.settings.region) || 'EU'; // Default to EU
     startCountdown(times[region]);
 });
@@ -34,23 +32,22 @@ timerAction.onDidReceiveSettings(({ payload }) => {
 function startCountdown(timeList) {
     clearInterval(updateInterval); // Clear any existing countdown
 
+    const now = new Date();
     const closestTime = timeList
-        .map(time => {
-            const [hours, minutes] = time.split(':');
-            const eventTime = new Date();
-            eventTime.setHours(hours, minutes, 0);
-            return eventTime > new Date() ? eventTime : null;
-        })
-        .filter(Boolean)
+        .map(time => getNextEventTime(time, now)) // Get the next valid event time
         .sort((a, b) => a - b)[0]; // Get the closest future time
 
-        //console.log("Closest time", closestTime);
-
     if (!closestTime) return; // No valid time
+    updateCountdown(closestTime, timeList);
+}
 
-    const updateCountdown = () => {
-        const timeDiff = closestTime - new Date();
-        //console.log("Time diff", timeDiff);
+/**
+ * Update the countdown for the next event.
+ */
+function updateCountdown(closestTime, timeList) {
+    const updateFn = () => {
+        const now = new Date();
+        const timeDiff = closestTime - now;
 
         if (timeDiff <= 0) {
             $SD.setTitle(timerActionContext, "Event\nStarted");
@@ -60,11 +57,26 @@ function startCountdown(timeList) {
             const title = timeDiff > 60000 
                 ? `${Math.floor(timeDiff / 60000)}\nmin`
                 : `${Math.floor(timeDiff / 1000)}\nsec`;
-            //console.log("Title", title);
             $SD.setTitle(timerActionContext, title);
         }
     };
 
-    updateCountdown();
-    updateInterval = setInterval(updateCountdown, closestTime - new Date() > 60000 ? 60000 : 1000);
+    updateFn();
+    updateInterval = setInterval(updateFn, closestTime - new Date() > 60000 ? 60000 : 1000);
+}
+
+/**
+ * Get the next valid event time, moving it to the next day if needed.
+ */
+function getNextEventTime(time, now) {
+    const [hours, minutes] = time.split(':');
+    const eventTime = new Date(now);
+    eventTime.setHours(hours, minutes, 0, 0);
+
+    // If the event time is earlier than the current time, move it to the next day
+    if (eventTime <= now) {
+        eventTime.setDate(eventTime.getDate() + 1);
+    }
+
+    return eventTime;
 }
