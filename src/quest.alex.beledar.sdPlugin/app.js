@@ -51,13 +51,19 @@ function updateCountdown(closestTime, timeList) {
 
         if (timeDiff <= 0) {
             $SD.setTitle(timerActionContext, "Event\nStarted");
-            setTimeout(() => startCountdown(timeList), 10000); // Restart after 10 seconds
             clearInterval(updateInterval);
+            setTimeout(() => startCountdown(timeList), 10000); // Restart after 10 seconds
         } else {
             const title = timeDiff > 60000 
                 ? `${Math.floor(timeDiff / 60000)}\nmin`
                 : `${Math.floor(timeDiff / 1000)}\nsec`;
             $SD.setTitle(timerActionContext, title);
+
+            // Dynamically adjust interval to update every second if timeDiff drops below 1 minute
+            if (timeDiff <= 60000 && updateInterval !== 1000) {
+                clearInterval(updateInterval); // Clear current interval
+                updateInterval = setInterval(updateFn, 1000); // Set interval to 1 second
+            }
         }
     };
 

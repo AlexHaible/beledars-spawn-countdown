@@ -6,7 +6,7 @@
 	"Name": "Beledar's Spawn Timer",
 	"Icon": "actions/template/assets/button_bg",
 	"URL": "https://www.elgato.com/en/gaming/stream-deck",
-	"Version": "1.1.2",
+	"Version": "1.1.3",
 	"Software": {
 		"MinimumVersion": "5.0"
 	},
